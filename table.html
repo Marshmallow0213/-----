@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="jumbotron bg-info">
+        <h1>2021 年全球晶圓代工市率-動態生成表格</h1>
+    </div>
+    <div id="container">
+
+    </div>
+
+    <script>
+        let ranking1 = {
+            rank1 : { rank:1,  company :"台積電", Country: "台灣", market:53.1},
+            rank2 : { rank:2,  company :"三星電子", Country: "韓國", market:17.3},
+            rank3 : { rank:3,  company :"聯電", Country: "台灣", market:7.2},
+            rank4 : { rank:4,  company :"格羅方德", Country: "美國", market:6.1},
+            rank5 : { rank:5,  company :"中芯國際", Country: "中國", market:5.3},
+            rank6 : { rank:6,  company :"華虹半導體", Country: "中國", market:2.6},
+            rank7 : { rank:7,  company :"力積電", Country: "台灣", market:1.8},
+            rank8 : { rank:8,  company :"世界先進", Country: "台灣", market:1.4},
+            rank9 : { rank:9,  company :"高塔半導體", Country: "以色列", market:1.4},
+            rank10 : { rank:10,  company :"東部高科", Country: "南韓", market:1}
+        };
+
+
+        let ranking2 = {
+            Titles:['排名', '公司', '國別', '市佔率%'],
+            rank: 
+            [
+                { rank:1,  company :"台積電", Country: "台灣", market:53.1},
+                { rank:2,  company :"三星電子", Country: "韓國", market:17.3},
+                { rank:3,  company :"聯電", Country: "台灣", market:7.2},
+                { rank:4,  company :"格羅方德", Country: "美國", market:6.1},
+                { rank:5,  company :"中芯國際", Country: "中國", market:5.3},
+                { rank:6,  company :"華虹半導體", Country: "中國", market:2.6},
+                { rank:7,  company :"力積電", Country: "台灣", market:1.8},
+                { rank:8,  company :"世界先進", Country: "台灣", market:1.4},
+                { rank:9,  company :"高塔半導體", Country: "以色列", market:1.4},
+                { rank:10,  company :"東部高科", Country: "南韓", market:1}
+            ]
+        };
+
+        let ranking2dArray = [];
+
+        let rankingCountry3 = {
+            Titles:['排名', '公司', '國別', '市佔率%'],
+            rank : 
+            {
+                rank1 : { rank:1,  company :"台積電", Country: "台灣", market:53.1},
+                rank2 : { rank:2,  company :"三星電子", Country: "韓國", market:17.3},
+                rank3 : { rank:3,  company :"聯電", Country: "台灣", market:7.2},
+                rank4 : { rank:4,  company :"格羅方德", Country: "美國", market:6.1},
+                rank5 : { rank:5,  company :"中芯國際", Country: "中國", market:5.3},
+                rank6 : { rank:6,  company :"華虹半導體", Country: "中國", market:2.6},
+                rank7 : { rank:7,  company :"力積電", Country: "台灣", market:1.8},
+                rank8 : { rank:8,  company :"世界先進", Country: "台灣", market:1.4},
+                rank9 : { rank:9,  company :"高塔半導體", Country: "以色列", market:1.4},
+                rank10 : { rank:10,  company :"東部高科", Country: "南韓", market:1}
+            }
+        };
+
+
+        let container;
+        let table, thead, tbody;
+
+        window.onload =function(){
+            container = document.getElementById('container');
+
+            table = document.createElement('table');
+            table.setAttribute("class", "table table-bordered table-striped table-dark");
+            thead = document.createElement('thead');
+            tbody = document.createElement('tbody');
+
+            CreateThead(ranking2.Titles);
+
+            ranking2.rank.forEach(rank=>{
+                let values = Object.values(rank);
+                ranking2dArray.push(values);
+            });
+
+            CreateTbody(ranking2dArray);
+        }
+
+        function CreateThead(titleArray){
+             let theadTR = document.createElement("tr");
+            titleArray.forEach((title, index)=>{
+                let th = document.createElement("th");
+                th.innerText = title;
+                theadTR.append(th);
+            });
+
+            thead.append(theadTR);
+            table.append(thead);
+            container.append(table);
+        }
+
+        function CreateTbody(ranking){
+            ranking.forEach(rank => { 
+                let tr = document.createElement("tr");
+                rank.forEach(columndata => {
+                    let td = document.createElement("td");
+                    td.innerText = columndata;
+
+                    tr.append(td);
+                });
+                tbody.append(tr);
+            });
+
+            table.append(tbody);
+        }
+    </script>
+</body>
+
+</html>
